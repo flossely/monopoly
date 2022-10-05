@@ -108,11 +108,16 @@ if (file_exists('locale')) {
     $locale = basename(array_key_first($lazones), '.locale');
 }
 $lingua = $locale;
+if (file_exists('mode')) {
+    $mode = file_get_contents('mode');
+} else {
+    $mode = $paradigmData['default_mode'];
+}
 
 $add = $_REQUEST['id'];
-$dataString = $_REQUEST['data'];
+$data = $_REQUEST['data'];
 
-$objMeta = parseGetData($dataString);
+$meta = parseGetData($data);
 
 if (!file_exists($add)) {
     mkdir($add);
@@ -127,10 +132,8 @@ if (!file_exists($add.'/rating')) {
     file_put_contents($add.'/rating', $paradigmData['default_rating']);
     chmod($add.'/rating', 0777);
 }
-if (!file_exists($add.'/mode')) {
-    file_put_contents($add.'/mode', $paradigmData['default_mode']);
-    chmod($add.'/mode', 0777);
-}
+file_put_contents($add.'/mode', $mode);
+chmod($add.'/mode', 0777);
 if (!file_exists($add.'/score')) {
     file_put_contents($add.'/score', $paradigmData['default_score']);
     chmod($add.'/score', 0777);
@@ -147,11 +150,11 @@ file_put_contents($add.'/locale', $lingua);
 chmod($add.'/locale', 0777);
 intoZone($add);
 
-if (isset($objMeta['name'])) {
-    file_put_contents($add.'/name', $objMeta['name']);
+if (isset($meta['name'])) {
+    file_put_contents($add.'/name', $meta['name']);
     chmod($add.'/name', 0777);
 }
 
-if (isset($objMeta['favicon'])) {
-    gitPerform('https://github.com', 'raw', 'main', 'wholemarket', $objMeta['favicon'], $add, 'favicon.png');
+if (isset($meta['favicon'])) {
+    gitPerform('https://github.com', 'raw', 'main', 'wholemarket', $meta['favicon'], $add, 'favicon.png');
 }
