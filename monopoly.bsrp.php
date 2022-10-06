@@ -155,6 +155,6 @@ if (isset($meta['name'])) {
     chmod($add.'/name', 0777);
 }
 
-if (isset($meta['favicon'])) {
-    gitPerform('https://github.com', 'raw', 'main', 'wholemarket', $meta['favicon'], $add, 'favicon.png');
+if (isset($meta['item'])) {
+    gitPerform('https://github.com', 'thingy', 'main', 'wholemarket', $meta['item'].'.item.obj', $add, $meta['item'].'.item.obj');
 }
