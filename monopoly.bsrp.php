@@ -156,5 +156,5 @@ if (isset($meta['name'])) {
 }
 
 if (isset($meta['item'])) {
-    gitPerform('https://github.com', 'thingy', 'main', 'wholemarket', $meta['item'].'.item.obj', $add, $meta['item'].'.item.obj');
+    gitPerform('https://github.com', 'thingy', 'main', 'flossely', $meta['item'].'.item.obj', $add, $meta['item'].'.item.obj');
 }
